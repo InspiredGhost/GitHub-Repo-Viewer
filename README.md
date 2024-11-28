@@ -26,8 +26,8 @@ This project is a web application built with React and Tailwind CSS that allows 
 ### Installation
 
 1. Clone the repository:
-   git clone <repository-url>
-   cd github-repo-viewer
+   git clone [<repository-url>](https://github.com/InspiredGhost/GitHub-Repo-Viewer)
+   cd Github-Repo-Viewer
 
 2. Install dependencies: 
     npm install
