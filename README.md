@@ -25,6 +25,9 @@ This project is a web application built with React and Tailwind CSS that allows 
 
 ### Installation
 
+
+# [DEMO Link](https://github-repo-viewer-q2zr.onrender.com/)
+
 # Getting Started
 
 ```bash
@@ -38,7 +41,6 @@ npm install
 # Start the development server
 npm run start
 
-# DEMO Link
-https://github-repo-viewer-q2zr.onrender.com/
+
 
 
