@@ -34,8 +34,18 @@ const RepositoryList: React.FC<RepositoryListProps> = ({ repositories }) => {
 	];
 
 	return (
-		<div className="w-full h-96">
-			<DataGrid rows={repositories} columns={columns} pagination pageSizeOptions={[10, 20, 30]} />
+		<div className="w-full">
+			<DataGrid
+				rows={repositories}
+				columns={columns}
+				pagination
+				initialState={{
+					pagination: {
+						paginationModel: { pageSize: 10 }, // Set the default page size to 10
+					},
+				}}
+				pageSizeOptions={[10, 20, 30]} // Options for user to change the page size
+			/>
 		</div>
 	);
 };
