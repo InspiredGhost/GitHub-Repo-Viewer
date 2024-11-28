@@ -36,6 +36,6 @@ cd Github-Repo-Viewer
 npm install
 
 # Start the development server
-npm start
+npm run start
 
 
