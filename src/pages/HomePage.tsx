@@ -7,11 +7,33 @@ import { searchRepositories, Repository } from "../api/github";
 const HomePage: React.FC = () => {
 	const [repositories, setRepositories] = useState<Repository[]>([]);
 	const [loading, setLoading] = useState<boolean>(false);
+	const [page, setPage] = useState<number>(1);
+	const [query, setQuery] = useState<string>("");
+	const [pageCount, setPageCount] = useState<number>(1);
 
-	const handleSearch = async (query: string) => {
+	const handleSearch = async (searchQuery: string) => {
 		setLoading(true);
-		const repos = await searchRepositories(query);
+		setQuery(searchQuery);
+		const repos = await searchRepositories(searchQuery, 1);
 		setRepositories(repos);
+		setPage(1);
+		setPageCount(Math.ceil(676647 / 30)); // Assuming 30 results per page
+		setLoading(false);
+	};
+
+	const handlePageChange = async (newPage: number) => {
+		setLoading(true);
+		const repos = await searchRepositories(query, newPage);
+		setRepositories(repos);
+		setPage(newPage);
+		setLoading(false);
+	};
+	const handleLoadMore = async () => {
+		setLoading(true);
+		const nextPage = page + 1;
+		const repos = await searchRepositories(query, nextPage);
+		setRepositories((prevRepos) => [...prevRepos, ...repos]);
+		setPage(nextPage);
 		setLoading(false);
 	};
 
@@ -24,7 +46,13 @@ const HomePage: React.FC = () => {
 					<Loader />
 				) : (
 					<div className="mt-4">
-						<RepositoryList repositories={repositories} />
+						<RepositoryList repositories={repositories} page={page} pageCount={pageCount} onPageChange={handlePageChange} />{" "}
+						{repositories.length > 0 && (
+							<button onClick={handleLoadMore} className="bg-blue-900 text-white px-4 py-2 rounded mt-4">
+								{" "}
+								Load More{" "}
+							</button>
+						)}{" "}
 					</div>
 				)}
 			</div>

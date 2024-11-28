@@ -5,6 +5,9 @@ import { Repository } from "../api/github";
 
 interface RepositoryListProps {
 	repositories: Repository[];
+	page: number;
+	pageCount: number;
+	onPageChange: (page: number) => void;
 }
 
 const RepositoryList: React.FC<RepositoryListProps> = ({ repositories }) => {

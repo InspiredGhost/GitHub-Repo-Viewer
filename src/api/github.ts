@@ -36,8 +36,8 @@ export interface Commit {
 	};
 }
 
-export const searchRepositories = async (query: string): Promise<Repository[]> => {
-	const response = await axios.get(`https://api.github.com/search/repositories?q=${query}`);
+export const searchRepositories = async (query: string, page: number = 1): Promise<Repository[]> => {
+	const response = await axios.get(`https://api.github.com/search/repositories?q=${query}&page=${page}`);
 	return response.data.items;
 };
 
@@ -72,6 +72,7 @@ export interface Issue {
 	user: {
 		login: string;
 	};
+	comments: number;
 	html_url: string;
 }
 
